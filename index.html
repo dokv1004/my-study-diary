@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Study Diary</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, "Noto Sans KR", sans-serif;
+        color: #263238;
+        background: #e8f6f2;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 18px 48px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 36px;
+        color: #24584f;
+      }
+
+      .subtitle {
+        margin: 8px 0 0;
+        color: #57726d;
+        font-size: 17px;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(38, 50, 56, 0.12);
+        padding: 24px;
+        margin-bottom: 22px;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 21px;
+        color: #24584f;
+      }
+
+      label {
+        display: block;
+        margin: 14px 0 6px;
+        font-weight: bold;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid #c9d8d4;
+        border-radius: 8px;
+        padding: 11px 12px;
+        font-size: 15px;
+        font-family: inherit;
+        background: #fbfefd;
+      }
+
+      textarea {
+        min-height: 82px;
+        resize: vertical;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #4aa392;
+        box-shadow: 0 0 0 3px rgba(74, 163, 146, 0.16);
+      }
+
+      .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #3f8f80;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #327568;
+      }
+
+      .secondary-btn {
+        background: #607d8b;
+      }
+
+      .secondary-btn:hover {
+        background: #506a76;
+      }
+
+      .danger-btn {
+        background: #d95c5c;
+      }
+
+      .danger-btn:hover {
+        background: #bd4747;
+      }
+
+      .guide-text {
+        margin: 10px 0 0;
+        color: #607d8b;
+        font-size: 14px;
+      }
+
+      .message {
+        min-height: 24px;
+        margin: 14px 0 0;
+        font-weight: bold;
+        color: #2f7d6f;
+      }
+
+      .diary-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .diary-item {
+        border: 1px solid #dce8e5;
+        border-radius: 10px;
+        padding: 18px;
+        background: #fbfefd;
+      }
+
+      .diary-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .diary-date {
+        margin: 0;
+        font-size: 18px;
+        color: #24584f;
+      }
+
+      .diary-content p {
+        margin: 8px 0;
+        white-space: pre-wrap;
+      }
+
+      .empty-text {
+        margin: 0;
+        color: #607d8b;
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 24px 12px 36px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .card {
+          padding: 18px;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        button {
+          width: 100%;
+        }
+
+        .diary-item-header {
+          align-items: stretch;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📚 My Study Diary</h1>
+        <p class="subtitle">
+          하루 학습을 기록하고 돌아볼 수 있는 나만의 다이어리
+        </p>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2>1. 오늘 학습 기록 입력</h2>
+
+          <label for="dateInput">날짜</label>
+          <input type="date" id="dateInput" />
+
+          <label for="goalsInput">오늘의 목표</label>
+          <textarea
+            id="goalsInput"
+            placeholder="오늘 이루고 싶은 학습 목표를 적어보세요."
+          ></textarea>
+
+          <label for="learnedInput">배운 것</label>
+          <textarea
+            id="learnedInput"
+            placeholder="오늘 새롭게 배운 내용을 적어보세요."
+          ></textarea>
+
+          <label for="memoInput">내용정리(메모)</label>
+          <textarea
+            id="memoInput"
+            placeholder="중요한 내용이나 기억할 점을 정리해보세요."
+          ></textarea>
+
+          <label for="difficultyInput">어려웠던 점</label>
+          <textarea
+            id="difficultyInput"
+            placeholder="막혔던 부분이나 더 공부할 부분을 적어보세요."
+          ></textarea>
+
+          <label for="feelingInput">하루 마무리(느낀점)</label>
+          <textarea
+            id="feelingInput"
+            placeholder="오늘 학습을 마치며 든 생각을 적어보세요."
+          ></textarea>
+
+          <div class="button-group">
+            <button type="button" id="saveBtn">기록 저장</button>
+            <button type="button" id="loadBtn" class="secondary-btn">
+              해당 날짜 불러오기
+            </button>
+            <button type="button" id="clearBtn" class="secondary-btn">
+              입력 비우기
+            </button>
+          </div>
+
+          <p id="message" class="message"></p>
+        </section>
+
+        <section class="card">
+          <h2>2. 날짜로 기록 찾기</h2>
+
+          <label for="searchDate">검색할 날짜</label>
+          <input type="date" id="searchDate" />
+
+          <div class="button-group">
+            <button type="button" id="searchBtn">날짜로 검색</button>
+            <button type="button" id="resetSearchBtn" class="secondary-btn">
+              검색 초기화
+            </button>
+          </div>
+
+          <p class="guide-text">
+            기본 상태에서는 전체 기록을 최신 날짜 순으로 보여줍니다.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>3. 학습 기록 목록</h2>
+          <div id="diaryList" class="diary-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // localStorage에 저장할 때 사용할 key 이름입니다.
+      const STORAGE_KEY = "my_study_diary";
+
+      const dateInput = document.getElementById("dateInput");
+      const goalsInput = document.getElementById("goalsInput");
+      const learnedInput = document.getElementById("learnedInput");
+      const memoInput = document.getElementById("memoInput");
+      const difficultyInput = document.getElementById("difficultyInput");
+      const feelingInput = document.getElementById("feelingInput");
+      const searchDate = document.getElementById("searchDate");
+      const diaryList = document.getElementById("diaryList");
+      const message = document.getElementById("message");
+
+      const saveBtn = document.getElementById("saveBtn");
+      const loadBtn = document.getElementById("loadBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const searchBtn = document.getElementById("searchBtn");
+      const resetSearchBtn = document.getElementById("resetSearchBtn");
+
+      // 오늘 날짜를 YYYY-MM-DD 형태로 만들어 date input에 넣습니다.
+      function getToday() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      // 저장된 기록 전체를 배열로 불러옵니다.
+      function getDiaries() {
+        const savedData = localStorage.getItem(STORAGE_KEY);
+        return savedData ? JSON.parse(savedData) : [];
+      }
+
+      // 기록 배열을 localStorage에 저장합니다.
+      function setDiaries(diaries) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(diaries));
+      }
+
+      function showMessage(text) {
+        message.textContent = text;
+      }
+
+      function clearInputs() {
+        goalsInput.value = "";
+        learnedInput.value = "";
+        memoInput.value = "";
+        difficultyInput.value = "";
+        feelingInput.value = "";
+        showMessage("입력칸을 비웠습니다.");
+      }
+
+      function getFormData() {
+        return {
+          date: dateInput.value,
+          goals: goalsInput.value.trim(),
+          learned: learnedInput.value.trim(),
+          memo: memoInput.value.trim(),
+          difficulty: difficultyInput.value.trim(),
+          feeling: feelingInput.value.trim(),
+        };
+      }
+
+      function fillForm(diary) {
+        dateInput.value = diary.date;
+        goalsInput.value = diary.goals;
+        learnedInput.value = diary.learned;
+        memoInput.value = diary.memo;
+        difficultyInput.value = diary.difficulty;
+        feelingInput.value = diary.feeling;
+      }
+
+      // 같은 날짜의 기록이 있으면 수정하고, 없으면 새로 저장합니다.
+      function saveDiary() {
+        const diary = getFormData();
+
+        if (!diary.date) {
+          showMessage("날짜를 선택해 주세요.");
+          return;
+        }
+
+        if (
+          !diary.goals &&
+          !diary.learned &&
+          !diary.memo &&
+          !diary.difficulty &&
+          !diary.feeling
+        ) {
+          showMessage("한 가지 이상 내용을 입력해 주세요.");
+          return;
+        }
+
+        const diaries = getDiaries();
+        const existingIndex = diaries.findIndex(
+          (item) => item.date === diary.date,
+        );
+
+        if (existingIndex >= 0) {
+          diaries[existingIndex] = diary;
+          showMessage("같은 날짜의 기록을 수정했습니다.");
+        } else {
+          diaries.push(diary);
+          showMessage("새 기록을 저장했습니다.");
+        }
+
+        setDiaries(diaries);
+        renderDiaries();
+      }
+
+      function loadDiaryByDate() {
+        const diaries = getDiaries();
+        const diary = diaries.find((item) => item.date === dateInput.value);
+
+        if (!dateInput.value) {
+          showMessage("불러올 날짜를 선택해 주세요.");
+          return;
+        }
+
+        if (!diary) {
+          showMessage("해당 날짜의 기록이 없습니다.");
+          return;
+        }
+
+        fillForm(diary);
+        showMessage("해당 날짜의 기록을 불러왔습니다.");
+      }
+
+      function deleteDiary(date) {
+        const isConfirmed = confirm(`${date} 기록을 삭제할까요?`);
+
+        if (!isConfirmed) {
+          return;
+        }
+
+        const diaries = getDiaries().filter((item) => item.date !== date);
+        setDiaries(diaries);
+        renderDiaries();
+        showMessage("기록을 삭제했습니다.");
+      }
+
+      function searchDiary() {
+        if (!searchDate.value) {
+          showMessage("검색할 날짜를 선택해 주세요.");
+          return;
+        }
+
+        const result = getDiaries().filter(
+          (item) => item.date === searchDate.value,
+        );
+        renderDiaries(result);
+        showMessage(`${searchDate.value} 기록을 검색했습니다.`);
+      }
+
+      function resetSearch() {
+        searchDate.value = "";
+        renderDiaries();
+        showMessage("검색을 초기화했습니다.");
+      }
+
+      function escapeHTML(text) {
+        return text
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function createContentLine(title, content) {
+        const safeContent = content ? escapeHTML(content) : "작성 내용 없음";
+        return `<p><strong>${title}</strong> ${safeContent}</p>`;
+      }
+
+      // 기록 목록은 최신 날짜가 위로 오도록 정렬해서 보여줍니다.
+      function renderDiaries(list) {
+        const diaries = list || getDiaries();
+        const sortedDiaries = [...diaries].sort((a, b) =>
+          b.date.localeCompare(a.date),
+        );
+
+        if (sortedDiaries.length === 0) {
+          diaryList.innerHTML =
+            '<p class="empty-text">아직 저장된 학습 기록이 없습니다.</p>';
+          return;
+        }
+
+        diaryList.innerHTML = sortedDiaries
+          .map(
+            (diary) => `
+        <article class="diary-item">
+          <div class="diary-item-header">
+            <h3 class="diary-date">${diary.date}</h3>
+            <button type="button" class="danger-btn" onclick="deleteDiary('${diary.date}')">삭제</button>
+          </div>
+          <div class="diary-content">
+            ${createContentLine("오늘의 목표:", diary.goals)}
+            ${createContentLine("배운 것:", diary.learned)}
+            ${createContentLine("내용정리(메모):", diary.memo)}
+            ${createContentLine("어려웠던 점:", diary.difficulty)}
+            ${createContentLine("하루 마무리(느낀점):", diary.feeling)}
+          </div>
+        </article>
+      `,
+          )
+          .join("");
+      }
+
+      saveBtn.addEventListener("click", saveDiary);
+      loadBtn.addEventListener("click", loadDiaryByDate);
+      clearBtn.addEventListener("click", clearInputs);
+      searchBtn.addEventListener("click", searchDiary);
+      resetSearchBtn.addEventListener("click", resetSearch);
+
+      // 페이지가 열리면 오늘 날짜를 자동 설정하고 저장된 기록을 보여줍니다.
+      dateInput.value = getToday();
+      renderDiaries();
+    </script>
+  </body>
+</html>
